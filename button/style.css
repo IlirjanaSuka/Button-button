@@ -1,0 +1,95 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .box {
+    width: 80%; /* Full width for a single column */
+    max-width: 260px; /* Set a maximum width for the boxes */
+    background-color: #fff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    margin: 10px;
+    margin-bottom: 40px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tab {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    margin-left: 38%;
+  }
+  
+  .title {
+    font-size: 13px; /* Adjusted font size */
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 39%;
+  }
+  
+  .content {
+    font-size: 12px; /* Adjusted font size */
+    color: gray;
+    margin-bottom: 20px;
+    margin-left: 30%;
+  }
+  
+  .button {
+    padding: 8px 100px; /* Adjusted padding */
+    background-color: transparent;
+    color: rgb(4, 114, 157);
+    border-color: rgb(4, 114, 157);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px; /* Adjusted font size */
+  }
+  
+  /* Arrange boxes in a single column */
+  @media (min-width: 768px) {
+    .box {
+      width: calc(50% - 20px); /* Two boxes in a row with spacing */
+    }
+  }
+  /*-----------------------------------------------------------------------*/
+  .body1 {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    display: flex;
+    background-color: transparent;
+    color: #494949;
+  }
+
+  .tab1 {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .tab1 a {
+    text-decoration: none;
+    color: #717171; /* Initial text color */
+    position: relative;
+  }
+
+  a:hover{
+    color: black;
+  }

@@ -1,0 +1,118 @@
+<!-- Save this file as index2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Combined Tabs - Page 2</title>
+</head>
+<body class="body1">
+
+    <div class="header">
+        <div class="tab1" onclick="handleTabClick(1)"><a href="button.html">Category 1</a></div>
+        <div class="tab1" onclick="handleTabClick(2)"><a href="button1.html">Category 2</a></div>
+        <div class="tab1" onclick="handleTabClick(3)"><a href="button2.html">Category 3</a></div>
+        <div class="tab1" onclick="handleTabClick(4)"><a href="button3.html">Category 4</a></div>
+        <div class="tab1" onclick="handleTabClick(5)"><a href="button4.html">Category 5</a></div>
+        <div class="tab1" onclick="handleTabClick(6)"><a href="button5.html">Category 6</a></div>
+        <div class="tab1" onclick="handleTabClick(7)"><a href="button6.html">Category 7</a></div>
+        <div class="tab1" onclick="handleTabClick(8)"><a href="button7.html">Category 8</a></div>
+    </div>
+
+    <div id="header-container"></div>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Box = ({ tab, title, content, button, onTabClick, onButtonClick }) => (
+          <div className="box">
+            <div className="tab" onClick={onTabClick}>{tab}</div>
+            <div className="title">{title}</div>
+            <div className="content">{content}</div>
+            <button className="button" onClick={onButtonClick}>{button}</button>
+          </div>
+        );
+
+        const App = () => {
+          const [activeContent, setActiveContent] = useState(null);
+
+          const handleButtonClick = (index) => {
+            alert(`Button ${index + 1} clicked!`);
+          };
+
+          useEffect(() => {
+            // Function to fetch and include header content
+            const includeHeader = async () => {
+              try {
+                const response = await fetch('header.html');
+                const headerText = await response.text();
+                document.getElementById('header-container').innerHTML = headerText;
+              } catch (error) {
+                console.error('Error loading header:', error);
+              }
+            };
+
+            // Call the function to include the header
+            includeHeader();
+
+            // You can also include additional logic or fetch other data here if needed
+
+          }, []);
+
+          return (
+            <div className="container">
+              {boxesData.map((boxData, index) => (
+                <Box
+                  key={index}
+                  tab={boxData.tab}
+                  title={boxData.title}
+                  content={boxData.content}
+                  button={boxData.button}
+                  onTabClick={() => handleTabClick(index)}
+                  onButtonClick={() => handleButtonClick(index)}
+                />
+              ))}
+            </div>
+          );
+        };
+        const boxesData = [
+          { tab: '.1', title: "Category 1", content: 'Details about Category 1', button: 'Explore' },
+          { tab: '.2', title: "Category 2", content: 'Details about Category 2', button: 'Explore' },
+          { tab: '.3', title: "Category 3", content: 'Details about Category 3', button: 'Explore' },
+          { tab: '.4', title: "Category 4", content: 'Details about Category 4', button: 'Explore' },
+          { tab: '.5', title: "Category 5", content: 'Details about Category 5', button: 'Explore' },
+          { tab: '.6', title: "Category 6", content: 'Details about Category 6', button: 'Explore' },
+          { tab: '.7', title: "Category 7", content: 'Details about Category 7', button: 'Explore' },
+          { tab: '.8', title: "Category 8", content: 'Details about Category 8', button: 'Explore' },
+        ];
+
+        // Function to fetch and include header content
+        function includeHeader() {
+          const headerContainer = document.getElementById('header-container');
+          const xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              headerContainer.innerHTML = xhr.responseText;
+            }
+          };
+          xhr.open('GET', 'header.html', true);
+          xhr.send();
+        }
+
+        // Call the function to include the header
+        includeHeader();
+
+        function handleTabClick(tabId) {
+            // Add your logic here
+            console.log('Tab clicked:', tabId);
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
