@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Combined Tabs</title>
+</head>
+<body class="body1">
+
+    <div class="header">
+        <div class="tab1" onclick="handleTabClick(1)"><a href="button.html">Domains</a></div>
+        <div class="tab1" onclick="handleTabClick(2)"><a href="button1.html">Web hosting</a></div>
+        <div class="tab1" onclick="handleTabClick(3)"><a href="button2.html">Dedicated services</a></div>
+        <div class="tab1" onclick="handleTabClick(4)"><a href="button3.html">Visual Cloud services</a></div>
+        <div class="tab1" onclick="handleTabClick(5)"><a href="button4.html">WordPress Hosting</a></div>
+        <div class="tab1" onclick="handleTabClick(6)"><a href="button5.html">Email Hosting</a></div>
+        <div class="tab1" onclick="handleTabClick(7)"><a href="button6.html">VPS Hosting services</a></div>
+        <div class="tab1" onclick="handleTabClick(8)"><a href="button7.html">Free Hosting</a></div>
+    </div>
+
+    <div id="header-container"></div>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Box = ({ tab, title, content, button, onTabClick, onButtonClick }) => (
+          <div className="box">
+            <div className="tab" onClick={onTabClick}>{tab}</div>
+            <div className="title">{title}</div>
+            <div className="content">{content}</div>
+            <button className="button" onClick={onButtonClick}>{button}</button>
+          </div>
+        );
+
+        const App = () => {
+          const [activeContent, setActiveContent] = useState(null);
+
+          const handleButtonClick = (index) => {
+            alert(`Button ${index + 1} clicked!`);
+          };
+
+          useEffect(() => {
+            // Function to fetch and include header content
+            const includeHeader = async () => {
+              try {
+                const response = await fetch('header.html');
+                const headerText = await response.text();
+                document.getElementById('header-container').innerHTML = headerText;
+              } catch (error) {
+                console.error('Error loading header:', error);
+              }
+            };
+
+            // Call the function to include the header
+            includeHeader();
+
+            // You can also include additional logic or fetch other data here if needed
+
+          }, []);
+
+          return (
+            <div className="container">
+              {boxesData.map((boxData, index) => (
+                <Box
+                  key={index}
+                  tab={boxData.tab}
+                  title={boxData.title}
+                  content={boxData.content}
+                  button={boxData.button}
+                  onTabClick={() => handleTabClick(index)}
+                  onButtonClick={() => handleButtonClick(index)}
+                />
+              ))}
+            </div>
+          );
+        };
+        const boxesData = [
+          { tab: '.COM', title: "\$5.99/yr", content: 'instead of \$10.99', button: 'Buy now' },
+          { tab: '.AI', title: "\$55.99/yr", content: 'instead of \$70.99', button: 'Buy now' },
+          { tab: '.NET', title: "\$7.99/yr", content: 'instead of \$13.99', button: 'Buy now' },
+          { tab: '.HEALTH', title: "\$7.99/yr", content: 'instead of \$15.99', button: 'Buy now' },
+          { tab: '.CO.UK', title:  "\$3.99/yr", content: 'instead of \$10.99', button: 'Buy now' },
+          { tab: '.ORG', title:  "\$15.99/yr", content: 'instead of \$23.99', button: 'Buy now' },
+          { tab: '.CO', title:  "\$26.33/yr", content: 'instead of \$30.99', button: 'Buy now' },
+          { tab: '.SEA', title:  "\$26.33/yr", content: 'instead of \$40.99', button: 'Buy now' },
+        ];
+
+        // Function to fetch and include header content
+        function includeHeader() {
+          const headerContainer = document.getElementById('header-container');
+          const xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              headerContainer.innerHTML = xhr.responseText;
+            }
+          };
+          xhr.open('GET', 'header.html', true);
+          xhr.send();
+        }
+
+        // Call the function to include the header
+        includeHeader();
+        
+        function handleTabClick(tabId) {
+            // Add your logic here
+            console.log('Tab clicked:', tabId);
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
